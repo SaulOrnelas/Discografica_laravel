@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Disk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DiskController extends Controller
 {
@@ -14,17 +15,8 @@ class DiskController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $disks = Disk::all();
+        return $disks;
     }
 
     /**
@@ -35,7 +27,8 @@ class DiskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::table('disks')->insertGetId($request->all());
+        return "Disco insertado";
     }
 
     /**
@@ -46,18 +39,7 @@ class DiskController extends Controller
      */
     public function show(Disk $disk)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Disk  $disk
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Disk $disk)
-    {
-        //
+        return $disk;
     }
 
     /**
@@ -69,9 +51,18 @@ class DiskController extends Controller
      */
     public function update(Request $request, Disk $disk)
     {
-        //
-    }
+        $disk->title = $request->title;
+        $disk->artist = $request->artist;
+        $disk->price = $request->price;
+        $disk->image = $request->image;
+        $disk->stock = $request->stock;
+        $disk->genre = $request->genre;
+        $disk->description = $request->description;
+        $disk->user_id = $request->user_id;
 
+        $disk->save();
+        return "Disco modificado";
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -80,6 +71,7 @@ class DiskController extends Controller
      */
     public function destroy(Disk $disk)
     {
-        //
+        $disk->delete();
+        return "Disco eliminado";
     }
 }

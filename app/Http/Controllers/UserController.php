@@ -60,7 +60,7 @@ class UserController extends Controller
         $user->user_type = $request->user_type;
 
         $user->save();
-        return "Trabajo hecho my friend";
+        return "Usuario actualizado";
     }
     /**
      * Remove the specified resource from storage.
@@ -71,7 +71,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return "eliminadillo";
+        return "Usuario eliminado";
         
     }
 }
