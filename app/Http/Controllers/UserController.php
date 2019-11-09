@@ -51,15 +51,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $user->name = $request->name;
-        $user->lastname = $request->lastname;
-        $user->phone == $request->phone;
-        $user->address = $request->address;
-        $user->email = $request->email;
-        $user->password = $request->password;
-        $user->user_type = $request->user_type;
-
-        $user->save();
+        DB::table('users')->where('id', $user->id)->update($request->all());
         return "Usuario actualizado";
     }
     /**
@@ -72,6 +64,6 @@ class UserController extends Controller
     {
         $user->delete();
         return "Usuario eliminado";
-        
+
     }
 }

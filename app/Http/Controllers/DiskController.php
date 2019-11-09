@@ -51,16 +51,7 @@ class DiskController extends Controller
      */
     public function update(Request $request, Disk $disk)
     {
-        $disk->title = $request->title;
-        $disk->artist = $request->artist;
-        $disk->price = $request->price;
-        $disk->image = $request->image;
-        $disk->stock = $request->stock;
-        $disk->genre = $request->genre;
-        $disk->description = $request->description;
-        $disk->user_id = $request->user_id;
-
-        $disk->save();
+        DB::table('disks')->where('id', $disk->id)->update($request->all());
         return "Disco modificado";
     }
     /**
